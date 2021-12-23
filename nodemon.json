@@ -1,0 +1,15 @@
+{
+    "watch": [
+        "src"
+    ],
+    "ext": "ts,json",
+    "ignore": [
+        "src/**/*.spec.ts"
+    ],
+    "exec": "npx ts-node ./src/app.ts",
+    "env": {
+        "MONGO_USER": "root",
+        "MONGO_PASSWORD": "root",
+        "MONGO_DB": "192.168.1.72:27017"
+    }
+}

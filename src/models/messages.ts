@@ -1,12 +1,17 @@
 import { model, Schema } from "mongoose";
 
 export interface IMessage {
+    id?: string,
     sender: {
         name: string
     },
     body: string,
     timestamp: number
 }
+
+export type sortIMessges = (a: IMessage, b: IMessage) => number;
+export const messageDesc: sortIMessges = (a, b) => b.timestamp - a.timestamp;
+export const messageAsc: sortIMessges = (a, b) => a.timestamp - b.timestamp;
 
 const messageSchema = new Schema({
     sender: {

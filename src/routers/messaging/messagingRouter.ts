@@ -1,6 +1,6 @@
 import express from "express";
 import { body } from "express-validator";
-import { sentMessageController } from "../../controllers/sendMesageController";
+import { getMessagesController, sentMessageController } from "../../controllers/sendMesageController";
 
 const router = express.Router();
 
@@ -10,6 +10,11 @@ router.post(
   body("body").isString(),
   body("timestamp").isNumeric(),
   sentMessageController
+);
+
+router.get(
+  "/message",
+  getMessagesController
 );
 
 export default router;

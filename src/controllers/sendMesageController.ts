@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
 import { IMessage } from "../models/messages";
-import { sendMessage } from "../services/messaging/messagingService";
+import { getMessages, sendMessage } from "../services/messaging/messagingService";
 
 export const sentMessageController = async (req: Request, res: Response) => {
     const errors = validationResult(req);
@@ -20,4 +20,14 @@ export const sentMessageController = async (req: Request, res: Response) => {
         });
     }
 };
-    
+
+export const getMessagesController = async (req: Request, res: Response) => {
+    try {
+        const messages = await getMessages();
+        res.status(200).json(messages);
+    } catch (error) {
+        res.status(500).json({
+            messages: "Unable to load messages!"
+        })
+    }
+}

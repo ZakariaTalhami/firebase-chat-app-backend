@@ -1,5 +1,6 @@
 import { database } from "firebase-admin";
-import { IMessage, Message, messageAsc, sortIMessges } from "../../models/messages";
+import { IMessage, messageAsc, sortIMessges } from "../../models/messages";
+import { sendNotificationMessage } from "../firebase/firebaseMessagingService";
 
 const db = database();
 const messagingRef = db.ref('Messaging')
@@ -14,8 +15,9 @@ const messagingRef = db.ref('Messaging')
  */
 export async function sendMessage(message: IMessage) {
     // Save to firebase
-    messagingRef.push(message)
-
+    messagingRef.push(message);
+    // Send Notification Message
+    sendNotificationMessage(message, 'chat');
     return message;
 }
 

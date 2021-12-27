@@ -1,6 +1,8 @@
 import express from "express";
 import { body } from "express-validator";
-import { getMessagesController, sentMessageController } from "../../controllers/sendMesageController";
+import { getMessagesController } from "../../controllers/getMessagesController";
+import { sentMessageController } from "../../controllers/sendMesageController";
+import { subscribeToTopicController } from "../../controllers/subscribeToTopicController";
 
 const router = express.Router();
 
@@ -15,6 +17,12 @@ router.post(
 router.get(
   "/message",
   getMessagesController
+);
+
+router.post(
+  "/message/subscribe",
+  body("token").isString(),
+  subscribeToTopicController
 );
 
 export default router;

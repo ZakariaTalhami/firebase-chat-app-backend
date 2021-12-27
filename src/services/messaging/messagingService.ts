@@ -1,6 +1,6 @@
 import { database } from "firebase-admin";
 import { IMessage, messageAsc, sortIMessges } from "../../models/messages";
-import { sendNotificationMessage } from "../firebase/firebaseMessagingService";
+import { sendNotificationMessage, subscribeUserToTopic } from "../firebase/firebaseMessagingService";
 
 const db = database();
 const messagingRef = db.ref('Messaging')
@@ -19,6 +19,10 @@ export async function sendMessage(message: IMessage) {
     // Send Notification Message
     sendNotificationMessage(message, 'chat');
     return message;
+}
+
+export async function subscribeToTopic(token: string) {
+    subscribeUserToTopic(token, 'chat')
 }
 
 export async function getMessages(sortFunction: sortIMessges = messageAsc): Promise<IMessage[]> {
